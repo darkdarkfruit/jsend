@@ -35,3 +35,53 @@ RFail    --> Result Fail
 RError   --> Result Error
 
 
+Usage: (sample)
+========================
+
+
+In [1]: from jsend import RSuccess, RFail, RError   # from jsend import *
+
+In [2]: rs = RSuccess()
+
+In [3]: rs
+Out[3]: {'data': {}, 'status': 'success'}
+
+In [4]: rs.data['post'] = {'username' : 'you', 'password' : 'pwd' }
+
+In [5]: rs
+Out[5]: {'data': {'post': {'password': 'pwd', 'username': 'you'}}, 'status': 'success'}
+
+In [6]: rf = RFail()
+
+In [7]: rf
+Out[7]: {'data': {}, 'status': 'fail'}
+
+In [8]: rf.data['why'] = 'You have entered the wrong number'
+
+In [9]: rf
+Out[9]: {'data': {'why': 'You have entered the wrong number'}, 'status': 'fail'}
+
+In [10]: rr = RError
+
+In [11]: rr
+Out[11]: jsend.jsend.RError
+
+In [12]: rr = RError()
+
+In [13]: rr
+Out[13]: 
+{'code': {},
+ 'data': {},
+ 'message': 'error occurres during processing',
+ 'status': 'error'}
+
+In [14]: rr.data['stack'] = 'stack overflows'
+
+In [15]: rr.code['return_code'] = 1
+
+In [16]: rr
+Out[16]: 
+{'code': {'return_code': 1},
+ 'data': {'stack': 'stack overflows'},
+ 'message': 'error occurres during processing',
+ 'status': 'error'}

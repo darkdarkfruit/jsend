@@ -56,6 +56,10 @@ RError   --> Result Error
 helper.py
 '''
 
+__all__ = ['RSuccess', 'RFail', 'RError']
+
+
+
 class RSuccess(dict):
     """
     client successfully get the data from server.

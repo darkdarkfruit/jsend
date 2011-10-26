@@ -1,8 +1,7 @@
-from jsend import RSuccess
-from jsend import RFail
-from jsend import RError
+import jsend
+from jsend import *
 
-__all__ = (RSuccess, RFail, RError)
+__all__ = jsend.__all__
 
 __author__ = 'darkdarkfruit'
 
