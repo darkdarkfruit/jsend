@@ -6,7 +6,7 @@ __all__ = (RSuccess, RFail, RError)
 
 __author__ = 'darkdarkfruit'
 
-VERSION = (0, 1, 0)
+VERSION = (0, 1, 6)
 
 def get_version():
     version = '%s.%s' % (VERSION[0], VERSION[1])
