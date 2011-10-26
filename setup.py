@@ -21,16 +21,16 @@ VERSION = get_version(eval(version_line.split('=')[-1]))
 print VERSION
 
 CLASSIFIERS = [
-    'Development Status :: 1 - Beta',
+    'Development Status :: 4 - Beta',
     'Intended Audience :: Developers',
     'License :: OSI Approved :: MIT License',
     'Operating System :: OS Independent',
     'Programming Language :: Python',
-    'Topic :: Net',
+    'Topic :: Internet',
     'Topic :: Software Development :: Libraries :: Python Modules',
 ]
 
-setup(name='jsend',
+setup(name='python-jsend',
       version=VERSION,
       packages=find_packages(),
       author='darkdarkfruit',
