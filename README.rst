@@ -27,7 +27,9 @@ When setting up a JSON API, you'll have all kinds of different types of calls an
 this module include 3 classes:
 ==============================
 RSuccess --> Result Success
+
 RFail    --> Result Fail
+
 RError   --> Result Error
 
 
