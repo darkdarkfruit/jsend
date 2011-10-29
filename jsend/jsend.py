@@ -127,7 +127,7 @@ class RFail(dict):
 class RError(dict):
     """
     client can't get data from server. 
-    Processing is normal, but error occurres(often, it's due to server error)
+    Processing is normal, but error occurs(often, it's due to server error)
 
     rs_fail, result_fail
     """
@@ -136,7 +136,7 @@ class RError(dict):
         """init
         """
         self['status'] = 'error'
-        self['message'] = 'error occurres during processing'
+        self['message'] = 'error occurs during processing'
         self['code'] = {} #optional
         self['data'] = {} #optional
 
