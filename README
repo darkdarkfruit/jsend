@@ -8,6 +8,12 @@ Note:
 ============
 (note: if there is a "README" file, it's a hardlink of "README.rst")
 
+Install:
+============
+* pip install python-jsend
+
+* or download the tarbal, decompress it, then run "python setup.py install"
+
 
 Shortely: (borrowed from http://labs.omniti.com/labs/jsend)
 =================================================================
