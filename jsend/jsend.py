@@ -38,12 +38,19 @@ A basic JSend-compliant response is as simple as this:
 }
 }}}
 
-When setting up a JSON API, you'll have all kinds of different types of calls and responses.  JSend separates responses into some basic types, and defines required and optional keys for each type:
+When setting up a JSON API, you'll have all kinds of different types of calls and responses. 
+JSend separates responses into some basic types, and defines required and optional keys for each type:
 
-||''Type''||''Description''||''Required Keys''||''Optional Keys''||
-||success ||All went well, and (usually) some data was returned.||status, data||||
-||fail    ||There was a problem with the data submitted, or some pre-condition of the API call wasn't satisfied||status, data||||
-||error   ||An error occurred in processing the request, i.e. an exception was thrown||status, message||code, data||
+| ''Type'' | ''Description''                                        | ''Required Keys'' | ''Optional Keys'' |
+|----------+--------------------------------------------------------+-------------------+-------------------|
+| success  | All went well, and (usually) some data was returned.   | status, data      |                   |
+|          |                                                        |                   |                   |
+| fail     | There was a problem with the data submitted,           | status, data      |                   |
+|          | or some pre-condition of the API call wasn't satisfied |                   |                   |
+|          |                                                        |                   |                   |
+| error    | An error occurred in processing the request,           | status, message   | code, data        |
+|          | i.e. an exception was thrown                           |                   |                   |
+
 =================================================================
 
 this module include 3 classes:
@@ -53,7 +60,7 @@ RFail    --> Result Fail
 RError   --> Result Error
 ==============================
 
-helper.py
+
 '''
 
 __all__ = ['RSuccess', 'RFail', 'RError']
@@ -69,6 +76,7 @@ class RSuccess(dict):
     def __init__(self, ):
         """init
         """
+        super(RSuccess, self).__init__()
         self['status'] = 'success'
         self['data'] = {}
 
@@ -101,6 +109,7 @@ class RFail(dict):
     def __init__(self, ):
         """init
         """
+        super(RFail, self).__init__()
         self['status'] = 'fail'
         self['data'] = {}
 
@@ -135,6 +144,7 @@ class RError(dict):
     def __init__(self, ):
         """init
         """
+        super(RError, self).__init__()        
         self['status'] = 'error'
         self['message'] = 'error occurs during processing'
         self['code'] = {} #optional
