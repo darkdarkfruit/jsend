@@ -6,13 +6,22 @@ compatable with jsend: http://labs.omniti.com/labs/jsend
 
 Note:
 ============
-(note: if there is a "README" file, it's a hardlink of "README.rst")
+(note: if there is a "README.rst" file, it's a softlink of "README")
 
 Install:
 ============
-* pip install python-jsend
+pip install python-jsend
 
-* or download the tarbal, decompress it, then run "python setup.py install"
+Or download the tarbal, decompress it, then run "python setup.py install"
+
+Test:
+==========
+python setup.py test
+note: it may show the warning messages like something below:
+
+"test.pytest.py/_pytest.core:147: UserWarning: Module _pytest was already imported from test.pytest.py/_pytest, but /usr/local/lib/python2.6/dist-packages is being added to sys.path"
+
+It does no harm, just ommit it.
 
 
 Shortely: (borrowed from http://labs.omniti.com/labs/jsend)
