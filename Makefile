@@ -1,5 +1,5 @@
 files = jsend/__init__.py jsend/jsend.py jsend/test_jsend.py
-file_pytest_genscript = test.pytest.py
+file_pytest_genscript = jsend/test.pytest.py
 
 default: test
 	echo ''
@@ -7,7 +7,7 @@ default: test
 
 test_python_setup: ${file_pytest_genscript}
 	echo '==> generate "test.pytest.py"'
-	py.test --genscript=test.pytest.py
+	py.test --genscript=${file_pytest_genscript}
 
 
 test: ${files} test_python_setup
