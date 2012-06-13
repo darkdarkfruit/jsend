@@ -66,7 +66,7 @@ RError   --> Result Error
 test_jsend.py
 '''
 
-from  jsend import RSuccess, RFail, RError
+from  .jsend import RSuccess, RFail, RError
 
 def test_jsend():
     rs = RSuccess()
@@ -99,19 +99,33 @@ def test_jsend():
         else:
             assert False
 
+    # test data part
+    for i in lst:
         try:
-            i.data = 'abc'
-        except AttributeError as e:
-            assert e
-        else:
+            i.data = 'This is data'
+        except Exception as e:
+            print(e)
             assert False
-
+    
+    # test RError's code part
     try:
-        rr.code = 'code'
-    except AttributeError as e:
-        assert e
-    else:
+        rr.code = 404
+    except Exception as e:
+        print(e)
         assert False
+    #     try:
+    #         i.data = 'abc'
+    #     except AttributeError as e:
+    #         assert e
+    #     else:
+    #         assert False
+
+    # try:
+    #     rr.code = 'code'
+    # except AttributeError as e:
+    #     assert e
+    # else:
+    #     assert False
     
 if __name__ == '__main__':
     test_jsend()

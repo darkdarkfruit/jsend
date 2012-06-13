@@ -100,6 +100,19 @@ class RSuccess(dict):
         return self['data']
 
 
+    @data.setter
+    def data(self, data):
+        """ set error message
+        
+        Arguments:
+        - 'self':
+        - 'msg' : set the message
+        """
+        self['data'] = data
+        
+
+
+
 class RFail(dict):
     """
     client can't get data from server. (Server is alright)
@@ -131,6 +144,19 @@ class RFail(dict):
         - `self`:
         """
         return self['data']
+
+
+    @data.setter
+    def data(self, data):
+        """ set error message
+        
+        Arguments:
+        - 'self':
+        - 'msg' : set the message
+        """
+        self['data'] = data
+
+
 
 
 class RError(dict):
@@ -189,6 +215,17 @@ class RError(dict):
         """
         return self['code']
 
+
+    @code.setter
+    def code(self, code):
+        """get code
+        
+        Arguments:
+        - `self`:
+        """
+        self['code'] = code
+
+
     @property
     def data(self):
         """get data
@@ -198,3 +235,13 @@ class RError(dict):
         """
         return self['data']
 
+
+    @data.setter
+    def data(self, data):
+        """ set error message
+        
+        Arguments:
+        - 'self':
+        - 'msg' : set the message
+        """
+        self['data'] = data
