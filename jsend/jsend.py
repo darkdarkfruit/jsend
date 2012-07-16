@@ -53,6 +53,24 @@ JSend separates responses into some basic types, and defines required and option
 
 =================================================================
 
+changelog: (2012-07-16)
+in pracmatical usage, code representing status is very import, so add 'code' key to "Required Keys"
+
+
+| ''Type'' | ''Description''                                        | ''Required Keys''  | ''Optional Keys'' |
+|----------+--------------------------------------------------------+--------------------+-------------------|
+| success  | All went well, and (usually) some data was returned.   | status, code, data |                   |
+|          |                                                        |                    |                   |
+| fail     | There was a problem with the data submitted,           | status, code, data |                   |
+|          | or some pre-condition of the API call wasn't satisfied |                    |                   |
+|          |                                                        |                    |                   |
+| error    | An error occurred in processing the request,           | status, message    | code, data        |
+|          | i.e. an exception was thrown                           |                    |                   |
+
+
+
+
+
 this module include 3 classes:
 ==============================
 RSuccess --> Result Success
@@ -88,6 +106,29 @@ class RSuccess(dict):
         - `self`:
         """
         return self['status']
+
+
+    @property
+    def code(self):
+        """get code
+        
+        Arguments:
+        - `self`:
+        """
+        return self['code']
+
+
+    @code.setter
+    def code(self, code):
+        """ set error message
+        
+        Arguments:
+        - 'self':
+        - 'msg' : set the message
+        """
+        self['code'] = code
+
+
 
 
     @property
@@ -134,6 +175,27 @@ class RFail(dict):
         - `self`:
         """
         return self['status']
+
+
+    @property
+    def code(self):
+        """get code
+        
+        Arguments:
+        - `self`:
+        """
+        return self['code']
+
+
+    @code.setter
+    def code(self, code):
+        """ set error message
+        
+        Arguments:
+        - 'self':
+        - 'msg' : set the message
+        """
+        self['code'] = code
 
 
     @property

@@ -113,6 +113,16 @@ def test_jsend():
     except Exception as e:
         print(e)
         assert False
+
+
+    # test code part
+    for i in lst:
+        try:
+            i.code = 200
+        except Exception as e:
+            assert False
+
+
     #     try:
     #         i.data = 'abc'
     #     except AttributeError as e:
