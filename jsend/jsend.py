@@ -96,6 +96,7 @@ class RSuccess(dict):
         """
         super(RSuccess, self).__init__()
         self['status'] = 'success'
+        self['code'] = 0
         self['data'] = {}
 
     @property
@@ -165,6 +166,7 @@ class RFail(dict):
         """
         super(RFail, self).__init__()
         self['status'] = 'fail'
+        self['code'] = 0
         self['data'] = {}
 
     @property

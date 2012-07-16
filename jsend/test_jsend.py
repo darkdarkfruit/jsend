@@ -79,6 +79,9 @@ def test_jsend():
     assert rr.status == 'error'
     assert rr.message is not None
 
+    # check code initial
+    assert rs.code == 0 and rf.code == 0
+
     for i in lst:
         i.data['hello'] = 'hello'
         assert i.data['hello'] == 'hello'
