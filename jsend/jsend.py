@@ -54,7 +54,7 @@ JSend separates responses into some basic types, and defines required and option
 =================================================================
 
 changelog: (2012-07-16)
-in pracmatical usage, code representing status is very import, so add 'code' key to "Required Keys"
+In pracmatical usage, code representing status is very import, so add 'code' key to "Required Keys"
 
 
 | ''Type'' | ''Description''                                        | ''Required Keys''  | ''Optional Keys'' |
@@ -66,6 +66,23 @@ in pracmatical usage, code representing status is very import, so add 'code' key
 |          |                                                        |                    |                   |
 | error    | An error occurred in processing the request,           | status, message    | code, data        |
 |          | i.e. an exception was thrown                           |                    |                   |
+
+
+changelog: (2012-07-26)
+In pracmatical usage, a key "message" for all responese is very convenient for development.
+So add 'message' key to "Optional Keys" for type(success, fail)
+
+
+| ''Type'' | ''Description''                                        | ''Required Keys''  | ''Optional Keys'' |
+|----------+--------------------------------------------------------+--------------------+-------------------|
+| success  | All went well, and (usually) some data was returned.   | status, code, data | message           |
+|          |                                                        |                    |                   |
+| fail     | There was a problem with the data submitted,           | status, code, data | message           |
+|          | or some pre-condition of the API call wasn't satisfied |                    |                   |
+|          |                                                        |                    |                   |
+| error    | An error occurred in processing the request,           | status, message    | code, data        |
+|          | i.e. an exception was thrown                           |                    |                   |
+
 
 
 
@@ -98,6 +115,8 @@ class RSuccess(dict):
         self['status'] = 'success'
         self['code'] = 0
         self['data'] = {}
+        self['message'] = '' # optional
+
 
     @property
     def status(self):
@@ -121,15 +140,13 @@ class RSuccess(dict):
 
     @code.setter
     def code(self, code):
-        """ set error message
+        """ set code
         
         Arguments:
         - 'self':
-        - 'msg' : set the message
+        - 'code' : set code
         """
         self['code'] = code
-
-
 
 
     @property
@@ -144,14 +161,36 @@ class RSuccess(dict):
 
     @data.setter
     def data(self, data):
-        """ set error message
+        """ set data
         
         Arguments:
         - 'self':
-        - 'msg' : set the message
+        - 'data' : set data
         """
         self['data'] = data
         
+
+
+    @property
+    def message(self):
+        """get message
+        
+        Arguments:
+        - `self`:
+        """
+        return self['message']
+
+
+    @message.setter
+    def message(self, message):
+        """ set message
+        
+        Arguments:
+        - 'self':
+        - 'message' : set message
+        """
+        self['message'] = message
+
 
 
 
@@ -168,6 +207,7 @@ class RFail(dict):
         self['status'] = 'fail'
         self['code'] = 0
         self['data'] = {}
+        self['message'] = '' # optional
 
     @property
     def status(self):
@@ -191,11 +231,11 @@ class RFail(dict):
 
     @code.setter
     def code(self, code):
-        """ set error message
+        """ set code
         
         Arguments:
         - 'self':
-        - 'msg' : set the message
+        - 'code' : set code
         """
         self['code'] = code
 
@@ -212,14 +252,35 @@ class RFail(dict):
 
     @data.setter
     def data(self, data):
-        """ set error message
+        """ set data
         
         Arguments:
         - 'self':
-        - 'msg' : set the message
+        - 'data' : set data
         """
         self['data'] = data
 
+
+
+    @property
+    def message(self):
+        """get message
+        
+        Arguments:
+        - `self`:
+        """
+        return self['message']
+
+
+    @message.setter
+    def message(self, message):
+        """ set message
+        
+        Arguments:
+        - 'self':
+        - 'message' : set message
+        """
+        self['message'] = message
 
 
 
@@ -236,7 +297,7 @@ class RError(dict):
         """
         super(RError, self).__init__()        
         self['status'] = 'error'
-        self['message'] = 'error occurs during processing'
+        self['message'] = 'Error occurs during processing'
         self['code'] = {} #optional
         self['data'] = {} #optional
 
@@ -302,10 +363,10 @@ class RError(dict):
 
     @data.setter
     def data(self, data):
-        """ set error message
+        """ set data
         
         Arguments:
         - 'self':
-        - 'msg' : set the message
+        - 'date' : set data
         """
         self['data'] = data

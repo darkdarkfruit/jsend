@@ -77,6 +77,8 @@ def test_jsend():
     assert rs.status == 'success'
     assert rf.status == 'fail'
     assert rr.status == 'error'
+    assert rs.message == ''
+    assert rf.message == ''
     assert rr.message is not None
 
     # check code initial
@@ -123,7 +125,20 @@ def test_jsend():
         try:
             i.code = 200
         except Exception as e:
+            print(e)
             assert False
+
+    
+    # test message part
+    for i in lst:
+        try:
+            msg = 'This a test message'
+            i.message = msg
+            assert i.message == msg
+        except Exception as e:
+            print(e)
+            assert False
+
 
 
     #     try:
