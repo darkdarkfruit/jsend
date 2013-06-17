@@ -1,5 +1,5 @@
 files = jsend/__init__.py jsend/jsend.py jsend/test_jsend.py
-file_pytest_genscript = jsend/test.pytest.py
+file_pytest_genscript = jsend/test_jsend_pytest.py
 
 default: test
 	echo ''
