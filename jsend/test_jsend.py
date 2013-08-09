@@ -22,7 +22,7 @@
 #THE SOFTWARE.
 #
 
-''' 
+'''
 jsend test
 ==========
 You should have py.test installed first.
@@ -65,8 +65,9 @@ RError   --> Result Error
 
 test_jsend.py
 '''
-
-from  .jsend import RSuccess, RFail, RError
+import json
+# from  .jsend import RSuccess, RFail, RError
+from .jsend import *
 
 def test_jsend():
     rs = RSuccess()
@@ -94,7 +95,7 @@ def test_jsend():
     rr.code['stack'] = 'stack info...'
     assert rr.code['stack'] == 'stack info...'
 
-    
+
     # test property. can read, but can not write
     for i in lst:
         try:
@@ -111,7 +112,7 @@ def test_jsend():
         except Exception as e:
             print(e)
             assert False
-    
+
     # test RError's code part
     try:
         rr.code = 404
@@ -128,7 +129,7 @@ def test_jsend():
             print(e)
             assert False
 
-    
+
     # test message part
     for i in lst:
         try:
@@ -154,6 +155,62 @@ def test_jsend():
     #     assert e
     # else:
     #     assert False
-    
+
+
+def test_jsend_parse():
+    rs = RSuccess()
+    rf = RFail()
+    re = RError()
+    s_rs = json.dumps(rs)
+    s_rf = json.dumps(rf)
+    s_re = json.dumps(re)
+
+    rs.data = { k : v for (k, v) in zip(['a', 'b', 'c'], [3, 4, 5])}
+    rs_json = json.dumps(rs)
+    assert jsend_parse(rs_json) == rs
+
+    rf.data = { k : v for (k, v) in zip(['a', 'b', 'c'], [3, 4, 5])}
+    rf_json = json.dumps(rf)
+    assert jsend_parse(rf_json) == rf
+
+    re.data = { k : v for (k, v) in zip(['a', 'b', 'c'], [3, 4, 5])}
+    re_json = json.dumps(re)
+    assert jsend_parse(re_json) == re
+
+    ## put some malformed jsend-str
+    # rs
+    mal_rs = rs
+    mal_rs['status'] = 'what-status'
+    mal_rs_json = json.dumps(mal_rs)
+    assert jsend_parse(mal_rs_json) == mal_rs_json
+    mal_rs.pop('status')
+    mal_rs_json = json.dumps(mal_rs)
+    assert jsend_parse(mal_rs_json) == mal_rs_json
+
+    # rf
+    mal_rf = rf
+    mal_rf['status'] = 'what-status'
+    mal_rf_json = json.dumps(mal_rf)
+    assert jsend_parse(mal_rf_json) == mal_rf_json
+    mal_rf.pop('status')
+    mal_rf_json = json.dumps(mal_rf)
+    assert jsend_parse(mal_rf_json) == mal_rf_json
+
+    # re
+    mal_re = re
+    mal_re['status'] = 'what-status'
+    mal_re_json = json.dumps(mal_re)
+    assert jsend_parse(mal_re_json) == mal_re_json
+    mal_re.pop('status')
+    mal_re_json = json.dumps(mal_re)
+    assert jsend_parse(mal_re_json) == mal_re_json
+
+    # clearly not jsend format str
+    strs = ['{wo}', 'aowfa', '{"b" : c}', '{"data" : {"a" : "ok" }}']
+    for k in strs:
+        assert jsend_parse(k) == k
+
+
 if __name__ == '__main__':
     test_jsend()
+    test_jsend_parse()

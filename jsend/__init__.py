@@ -5,7 +5,7 @@ __all__ = jsend.__all__
 
 __author__ = 'darkdarkfruit'
 
-VERSION = (0, 5, 0)
+VERSION = (0, 5, 1)
 
 def get_version():
     version = '%s.%s' % (VERSION[0], VERSION[1])

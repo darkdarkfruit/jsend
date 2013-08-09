@@ -22,7 +22,7 @@
 #THE SOFTWARE.
 #
 
-''' 
+'''
 compatable with jsend:
 http://labs.omniti.com/labs/jsend
 
@@ -38,7 +38,7 @@ A basic JSend-compliant response is as simple as this:
 }
 }}}
 
-When setting up a JSON API, you'll have all kinds of different types of calls and responses. 
+When setting up a JSON API, you'll have all kinds of different types of calls and responses.
 JSend separates responses into some basic types, and defines required and optional keys for each type:
 
 | ''Type'' | ''Description''                                        | ''Required Keys'' | ''Optional Keys'' |
@@ -52,20 +52,6 @@ JSend separates responses into some basic types, and defines required and option
 |          | i.e. an exception was thrown                           |                   |                   |
 
 =================================================================
-
-changelog: (2012-07-16)
-In pracmatical usage, code representing status is very import, so add 'code' key to "Required Keys"
-
-
-| ''Type'' | ''Description''                                        | ''Required Keys''  | ''Optional Keys'' |
-|----------+--------------------------------------------------------+--------------------+-------------------|
-| success  | All went well, and (usually) some data was returned.   | status, code, data |                   |
-|          |                                                        |                    |                   |
-| fail     | There was a problem with the data submitted,           | status, code, data |                   |
-|          | or some pre-condition of the API call wasn't satisfied |                    |                   |
-|          |                                                        |                    |                   |
-| error    | An error occurred in processing the request,           | status, message    | code, data        |
-|          | i.e. an exception was thrown                           |                    |                   |
 
 
 changelog: (2012-07-26)
@@ -87,6 +73,24 @@ So add 'message' key to "Optional Keys" for type(success, fail)
 
 
 
+changelog: (2012-07-16)
+In pracmatical usage, code representing status is very important, so add 'code' key to "Required Keys"
+
+
+| ''Type'' | ''Description''                                        | ''Required Keys''  | ''Optional Keys'' |
+|----------+--------------------------------------------------------+--------------------+-------------------|
+| success  | All went well, and (usually) some data was returned.   | status, code, data |                   |
+|          |                                                        |                    |                   |
+| fail     | There was a problem with the data submitted,           | status, code, data |                   |
+|          | or some pre-condition of the API call wasn't satisfied |                    |                   |
+|          |                                                        |                    |                   |
+| error    | An error occurred in processing the request,           | status, message    | code, data        |
+|          | i.e. an exception was thrown                           |                    |                   |
+
+
+
+
+
 
 this module include 3 classes:
 ==============================
@@ -98,7 +102,9 @@ RError   --> Result Error
 
 '''
 
-__all__ = ['RSuccess', 'RFail', 'RError']
+__all__ = ['RSuccess', 'RFail', 'RError', 'jsend_parse']
+
+import json
 
 
 
@@ -107,7 +113,7 @@ class RSuccess(dict):
     client successfully get the data from server.
     rs_success, result_success
     """
-    
+
     def __init__(self, ):
         """init
         """
@@ -121,7 +127,7 @@ class RSuccess(dict):
     @property
     def status(self):
         """get status
-        
+
         Arguments:
         - `self`:
         """
@@ -131,7 +137,7 @@ class RSuccess(dict):
     @property
     def code(self):
         """get code
-        
+
         Arguments:
         - `self`:
         """
@@ -141,7 +147,7 @@ class RSuccess(dict):
     @code.setter
     def code(self, code):
         """ set code
-        
+
         Arguments:
         - 'self':
         - 'code' : set code
@@ -152,7 +158,7 @@ class RSuccess(dict):
     @property
     def data(self):
         """get data
-        
+
         Arguments:
         - `self`:
         """
@@ -162,19 +168,19 @@ class RSuccess(dict):
     @data.setter
     def data(self, data):
         """ set data
-        
+
         Arguments:
         - 'self':
         - 'data' : set data
         """
         self['data'] = data
-        
+
 
 
     @property
     def message(self):
         """get message
-        
+
         Arguments:
         - `self`:
         """
@@ -184,7 +190,7 @@ class RSuccess(dict):
     @message.setter
     def message(self, message):
         """ set message
-        
+
         Arguments:
         - 'self':
         - 'message' : set message
@@ -193,13 +199,12 @@ class RSuccess(dict):
 
 
 
-
 class RFail(dict):
     """
     client can't get data from server. (Server is alright)
     rs_fail, result_fail
     """
-    
+
     def __init__(self, ):
         """init
         """
@@ -212,7 +217,7 @@ class RFail(dict):
     @property
     def status(self):
         """get status
-        
+
         Arguments:
         - `self`:
         """
@@ -222,7 +227,7 @@ class RFail(dict):
     @property
     def code(self):
         """get code
-        
+
         Arguments:
         - `self`:
         """
@@ -232,7 +237,7 @@ class RFail(dict):
     @code.setter
     def code(self, code):
         """ set code
-        
+
         Arguments:
         - 'self':
         - 'code' : set code
@@ -243,7 +248,7 @@ class RFail(dict):
     @property
     def data(self):
         """get data
-        
+
         Arguments:
         - `self`:
         """
@@ -253,7 +258,7 @@ class RFail(dict):
     @data.setter
     def data(self, data):
         """ set data
-        
+
         Arguments:
         - 'self':
         - 'data' : set data
@@ -265,7 +270,7 @@ class RFail(dict):
     @property
     def message(self):
         """get message
-        
+
         Arguments:
         - `self`:
         """
@@ -275,7 +280,7 @@ class RFail(dict):
     @message.setter
     def message(self, message):
         """ set message
-        
+
         Arguments:
         - 'self':
         - 'message' : set message
@@ -286,16 +291,16 @@ class RFail(dict):
 
 class RError(dict):
     """
-    client can't get data from server. 
+    client can't get data from server.
     Processing is normal, but error occurs(often, it's due to server error)
 
     rs_fail, result_fail
     """
-    
+
     def __init__(self, ):
         """init
         """
-        super(RError, self).__init__()        
+        super(RError, self).__init__()
         self['status'] = 'error'
         self['message'] = 'Error occurs during processing'
         self['code'] = {} #optional
@@ -304,7 +309,7 @@ class RError(dict):
     @property
     def status(self):
         """get status
-        
+
         Arguments:
         - `self`:
         """
@@ -314,7 +319,7 @@ class RError(dict):
     @property
     def message(self):
         """get message
-        
+
         Arguments:
         - `self`:
         """
@@ -323,18 +328,18 @@ class RError(dict):
     @message.setter
     def message(self, msg):
         """ set error message
-        
+
         Arguments:
         - 'self':
         - 'msg' : set the message
         """
         self['message'] = msg
-        
+
 
     @property
     def code(self):
         """get code
-        
+
         Arguments:
         - `self`:
         """
@@ -344,7 +349,7 @@ class RError(dict):
     @code.setter
     def code(self, code):
         """get code
-        
+
         Arguments:
         - `self`:
         """
@@ -354,7 +359,7 @@ class RError(dict):
     @property
     def data(self):
         """get data
-        
+
         Arguments:
         - `self`:
         """
@@ -364,9 +369,59 @@ class RError(dict):
     @data.setter
     def data(self, data):
         """ set data
-        
+
         Arguments:
         - 'self':
         - 'date' : set data
         """
         self['data'] = data
+
+
+
+
+def jsend_parse(json_str):
+    """
+    parse @a_dict_json_format and return an RSuccess instance.
+    if ok:
+        return a parsed dict
+    else:
+        return @json_str        # unchanged
+
+    Arguments:
+    - `self`:
+    - `json_str`:
+    """
+    # 1. it must be able to loads to json
+    try:
+        d = json.loads(json_str)
+    except Exception as e:
+        print('Error: Could not json.loads @json_str: %s. @json_str should be in json format. \nException is: %s' % (json_str, e))
+        return json_str
+
+    _j = None
+    if not d.has_key('status') or d['status'] not in ['success', 'fail', 'error']:
+        print('Error: Valid jsend format should have key: "status"\n. And the value of :"status" should be one of "success", "fail" or "error"')
+        return json_str
+
+    status = d['status']
+
+    r = None
+    if status == 'success':     # should be RSuccess
+        r = RSuccess()
+    elif status == 'fail' :     # should be RFail
+        r = RFail()
+    else:                       # should be RError
+        r = RError()
+
+    if d.has_key('data'):
+        r.data = d.get('data', {})
+    if d.has_key('code'):
+        r.code = d['code']
+    if d.has_key('message'):
+        r.message = d['message']
+
+    return r
+
+
+
+
