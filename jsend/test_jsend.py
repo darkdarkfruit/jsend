@@ -70,6 +70,25 @@ import json
 from .jsend import *
 
 def test_jsend():
+    r = RSuccess(status='test', code=100, data={'hey' : 'you, world, successful'}, message='aloha')
+    assert r.status == 'test'
+    assert r.code == 100
+    assert r.data == {'hey' : 'you, world, successful'}
+    assert r.message == 'aloha'
+
+    r = RFail(status='test', code=-100, data={'hey' : 'you, world, failed'}, message='aloha')
+    assert r.status == 'test'
+    assert r.code == -100
+    assert r.data == {'hey' : 'you, world, failed'}
+    assert r.message == 'aloha'
+
+    r = RError(status='test', code=-200, data={'hey' : 'you, world, error'}, message='aloha')
+    assert r.status == 'test'
+    assert r.code == -200
+    assert r.data == {'hey' : 'you, world, error'}
+    assert r.message == 'aloha'
+
+
     rs = RSuccess()
     rf = RFail()
     rr = RError()
@@ -78,12 +97,12 @@ def test_jsend():
     assert rs.status == 'success'
     assert rf.status == 'fail'
     assert rr.status == 'error'
-    assert rs.message == ''
-    assert rf.message == ''
-    assert rr.message is not None
+    assert rs.message == 'successful'
+    assert rf.message == 'failed'
+    assert rr.message == 'error'
 
     # check code initial
-    assert rs.code == 0 and rf.code == 0
+    assert rs.code == 0 and rf.code == -1 and rr.code == -2
 
     for i in lst:
         i.data['hello'] = 'hello'
@@ -91,9 +110,6 @@ def test_jsend():
 
     rr.message = 'server error'
     assert rr.message == 'server error'
-
-    rr.code['stack'] = 'stack info...'
-    assert rr.code['stack'] == 'stack info...'
 
 
     # test property. can read, but can not write

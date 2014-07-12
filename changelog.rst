@@ -1,10 +1,18 @@
+version 0.6.0 released at 2014-07-12
+====================================
+changelog:
+    make RSuccess, RFail, RError take default parameters in __init__ method.
+
+
 version 0.5.1 released at 2012-08-09.
+====================================
 changelog:
     add a function parse_jsend(jsend_str)
         return a jsend object if @jsend_str is a valid jsend-json str else return original @jsend_str
 
 
 version 0.5.0 2012-07-26 released
+====================================
 changelog: (2012-07-26)
 In pracmatical usage, a key "message" for all responese is very convenient for development.
 So add 'message' key to "Optional Keys" for type(success, fail)
@@ -27,6 +35,7 @@ So add 'message' key to "Optional Keys" for type(success, fail)
 
 
 version 0.4.0 2012-07-16 released
+====================================
     fix: in pracmatical usage, code representing status is very
     import, so add 'code' key to "Required Keys" for "type" of
     "success", "fail". See the table below
@@ -45,9 +54,12 @@ version 0.4.0 2012-07-16 released
 
 
 version 0.3.0 2012-06-13 released
+====================================
     fix: add setter for data(RSuccess, RFail, RError),
          add setter for code(RError)
 
 version 0.2.4 2011-11-19 released
+====================================
 
 version 0.2.2 2011-11-18 released
+====================================

@@ -26,3 +26,23 @@ stest:
 # make a source distribution in dist/
 sdist: ${files} test_python_setup
 	python setup.py sdist
+
+
+# upload to pypi
+upload: sdist
+	python setup.py sdist upload
+
+
+install : test
+	python setup.py install
+
+
+# git push to github
+# do `git remote add origin https://github.com/darkdarkfruit/python-jsend.git` first
+git_push:
+	git push 
+
+
+# git push with tags
+git_push_tags:
+	git push --tags

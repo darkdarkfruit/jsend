@@ -114,14 +114,14 @@ class RSuccess(dict):
     rs_success, result_success
     """
 
-    def __init__(self, ):
-        """init
+    def __init__(self, status='success', code=0, data={}, message='successful'):
+        """init jsend structure representing: "SUCCESS"
         """
         super(RSuccess, self).__init__()
-        self['status'] = 'success'
-        self['code'] = 0
-        self['data'] = {}
-        self['message'] = '' # optional
+        self['status'] = status
+        self['code'] = code
+        self['data'] = data
+        self['message'] = message # optional
 
 
     @property
@@ -205,14 +205,15 @@ class RFail(dict):
     rs_fail, result_fail
     """
 
-    def __init__(self, ):
-        """init
+    def __init__(self, status='fail', code=-1, data={}, message='failed'):
+        """init jsend structure representing: "FAIL"
         """
         super(RFail, self).__init__()
-        self['status'] = 'fail'
-        self['code'] = 0
-        self['data'] = {}
-        self['message'] = '' # optional
+        self['status'] = status
+        self['code'] = code
+        self['data'] = data
+        self['message'] = message # optional
+
 
     @property
     def status(self):
@@ -296,15 +297,15 @@ class RError(dict):
 
     rs_fail, result_fail
     """
-
-    def __init__(self, ):
-        """init
+    def __init__(self, status='error', code=-2, data={}, message='error'):
+        """init jsend structure representing: "ERROR"
         """
         super(RError, self).__init__()
-        self['status'] = 'error'
-        self['message'] = 'Error occurs during processing'
-        self['code'] = {} #optional
-        self['data'] = {} #optional
+        self['status'] = status
+        self['code'] = code
+        self['data'] = data
+        self['message'] = message # optional
+
 
     @property
     def status(self):
@@ -407,21 +408,10 @@ def jsend_parse(json_str):
 
     r = None
     if status == 'success':     # should be RSuccess
-        r = RSuccess()
+        r = RSuccess(**d)
     elif status == 'fail' :     # should be RFail
-        r = RFail()
+        r = RFail(**d)
     else:                       # should be RError
-        r = RError()
-
-    if d.has_key('data'):
-        r.data = d.get('data', {})
-    if d.has_key('code'):
-        r.code = d['code']
-    if d.has_key('message'):
-        r.message = d['message']
+        r = RError(**d)
 
     return r
-
-
-
-
