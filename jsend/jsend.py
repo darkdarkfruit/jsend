@@ -120,7 +120,8 @@ class RSuccess(dict):
         super(RSuccess, self).__init__()
         self['status'] = status
         self['code'] = code
-        self['data'] = data
+        # return a new dict instance(not reference) of dict(data)
+        self['data'] = dict(data) if isinstance(data, dict) else data
         self['message'] = message # optional
 
 
@@ -211,7 +212,8 @@ class RFail(dict):
         super(RFail, self).__init__()
         self['status'] = status
         self['code'] = code
-        self['data'] = data
+        # return a new dict instance(not reference) of dict(data)
+        self['data'] = dict(data) if isinstance(data, dict) else data
         self['message'] = message # optional
 
 
@@ -303,7 +305,8 @@ class RError(dict):
         super(RError, self).__init__()
         self['status'] = status
         self['code'] = code
-        self['data'] = data
+        # return a new dict instance(not reference) of dict(data)
+        self['data'] = dict(data) if isinstance(data, dict) else data
         self['message'] = message # optional
 
 
