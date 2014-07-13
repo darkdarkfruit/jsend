@@ -1,3 +1,14 @@
+version 0.7.0 released at 2014-07-13
+====================================
+changelog:
+    fixed critical bug: new dict instance not dict reference.
+    eg:
+        # return a new dict instance(not reference) of dict(data)
+        self['data'] = dict(data) if isinstance(data, dict) else data
+
+
+
+
 version 0.6.0 released at 2014-07-12
 ====================================
 changelog:
