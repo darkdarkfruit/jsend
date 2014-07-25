@@ -402,7 +402,6 @@ def jsend_parse(json_str):
         print('Error: Could not json.loads @json_str: %s. @json_str should be in json format. \nException is: %s' % (json_str, e))
         return json_str
 
-    _j = None
     if not d.has_key('status') or d['status'] not in ['success', 'fail', 'error']:
         print('Error: Valid jsend format should have key: "status"\n. And the value of :"status" should be one of "success", "fail" or "error"')
         return json_str
@@ -412,7 +411,7 @@ def jsend_parse(json_str):
     r = None
     if status == 'success':     # should be RSuccess
         r = RSuccess(**d)
-    elif status == 'fail' :     # should be RFail
+    elif status == 'fail':      # should be RFail
         r = RFail(**d)
     else:                       # should be RError
         r = RError(**d)

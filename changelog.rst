@@ -1,3 +1,12 @@
+version 0.7.1 released at 2014-07-25
+
+====================================
+changelog:
+    fix a minor pychecker warning(Local variable (_j) not used)
+
+
+
+
 version 0.7.0 released at 2014-07-13
 ====================================
 changelog:
