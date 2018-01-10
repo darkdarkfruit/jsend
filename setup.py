@@ -17,7 +17,7 @@ def get_version(version_tuple):
     return version
 
 init = os.path.join(os.path.dirname(__file__), 'jsend', '__init__.py')
-version_line = next(filter(lambda l: l.startswith('VERSION'), open(init)))
+version_line = list(filter(lambda l: l.startswith('VERSION'), open(init)))[0]
 VERSION = get_version(eval(version_line.split('=')[-1]))
 print('version: %s' % VERSION)
 
