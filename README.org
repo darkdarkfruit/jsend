@@ -40,15 +40,15 @@
   When setting up a JSON API, you'll have all kinds of different types of calls and responses.  JSend separates responses into some basic types, and defines required and optional keys for each type:
 
 
-  | ''Type'' | ''Description''                                        | ''Required Keys'' | ''Optional Keys'' |
-  |----------+--------------------------------------------------------+-------------------+-------------------|
-  | success  | All went well, and (usually) some data was returned.   | status, data      |                   |
-  |          |                                                        |                   |                   |
-  | fail     | There was a problem with the data submitted,           | status, data      |                   |
-  |          | or some pre-condition of the API call wasn't satisfied |                   |                   |
-  |          |                                                        |                   |                   |
-  | error    | An error occurred in processing the request,           | status, message   | code, data        |
-  |          | i.e. an exception was thrown                           |                   |                   |
+  | 'Type'  | 'Description'                                          | 'Required Keys' | 'Optional Keys' |
+  |---------+--------------------------------------------------------+-----------------+-----------------|
+  | success | All went well, and (usually) some data was returned.   | status, data    |                 |
+  |         |                                                        |                 |                 |
+  | fail    | There was a problem with the data submitted,           | status, data    |                 |
+  |         | or some pre-condition of the API call wasn't satisfied |                 |                 |
+  |         |                                                        |                 |                 |
+  | error   | An error occurred in processing the request,           | status, message | code, data      |
+  |         | i.e. an exception was thrown                           |                 |                 |
 
   """
 
@@ -57,15 +57,15 @@
   In pracmatical usage, code representing status is very import, so add 'code' key to "Required Keys"
 
 
-  | ''Type'' | ''Description''                                        | ''Required Keys''  | ''Optional Keys'' |
-  |----------+--------------------------------------------------------+--------------------+-------------------|
-  | success  | All went well, and (usually) some data was returned.   | status, code, data |                   |
-  |          |                                                        |                    |                   |
-  | fail     | There was a problem with the data submitted,           | status, code, data |                   |
-  |          | or some pre-condition of the API call wasn't satisfied |                    |                   |
-  |          |                                                        |                    |                   |
-  | error    | An error occurred in processing the request,           | status, message    | code, data        |
-  |          | i.e. an exception was thrown                           |                    |                   |
+  | 'Type'  | 'Description'                                          | 'Required Keys'    | 'Optional Keys' |
+  |---------+--------------------------------------------------------+--------------------+-----------------|
+  | success | All went well, and (usually) some data was returned.   | status, code, data |                 |
+  |         |                                                        |                    |                 |
+  | fail    | There was a problem with the data submitted,           | status, code, data |                 |
+  |         | or some pre-condition of the API call wasn't satisfied |                    |                 |
+  |         |                                                        |                    |                 |
+  | error   | An error occurred in processing the request,           | status, message    | code, data      |
+  |         | i.e. an exception was thrown                           |                    |                 |
 
 
   changelog: (2012-07-26)
@@ -73,15 +73,15 @@
   So add 'message' key to "Optional Keys" for type(success, fail)
 
 
-  | ''Type'' | ''Description''                                        | ''Required Keys''  | ''Optional Keys'' |
-  |----------+--------------------------------------------------------+--------------------+-------------------|
-  | success  | All went well, and (usually) some data was returned.   | status, code, data | message           |
-  |          |                                                        |                    |                   |
-  | fail     | There was a problem with the data submitted,           | status, code, data | message           |
-  |          | or some pre-condition of the API call wasn't satisfied |                    |                   |
-  |          |                                                        |                    |                   |
-  | error    | An error occurred in processing the request,           | status, message    | code, data        |
-  |          | i.e. an exception was thrown                           |                    |                   |
+  | 'Type'  | 'Description'                                          | 'Required Keys'    | 'Optional Keys' |
+  |---------+--------------------------------------------------------+--------------------+-----------------|
+  | success | All went well, and (usually) some data was returned.   | status, code, data | message         |
+  |         |                                                        |                    |                 |
+  | fail    | There was a problem with the data submitted,           | status, code, data | message         |
+  |         | or some pre-condition of the API call wasn't satisfied |                    |                 |
+  |         |                                                        |                    |                 |
+  | error   | An error occurred in processing the request,           | status, message    | code, data      |
+  |         | i.e. an exception was thrown                           |                    |                 |
 
 
 
@@ -97,7 +97,7 @@
 
 *  Usage: (sample)
   ========================
-
+#+BEGIN_SRC ipython
 
   In [1]: from jsend import RSuccess, RFail, RError   # from jsend import *
 
@@ -146,3 +146,4 @@
    'message': 'error occurres during processing',
    'status': 'error'}
 
+#+END_SRC
