@@ -1,6 +1,7 @@
 from setuptools import setup, find_packages, Command
 import os
 
+print('Please install pytest(https://docs.pytest.org/en/latest/contents.html) as test suite.')
 DESCRIPTION = "A python module for jsend"
 
 LONG_DESCRIPTION = None
@@ -16,9 +17,9 @@ def get_version(version_tuple):
     return version
 
 init = os.path.join(os.path.dirname(__file__), 'jsend', '__init__.py')
-version_line = filter(lambda l: l.startswith('VERSION'), open(init))[0]
+version_line = next(filter(lambda l: l.startswith('VERSION'), open(init)))
 VERSION = get_version(eval(version_line.split('=')[-1]))
-print VERSION
+print('version: %s' % VERSION)
 
 CLASSIFIERS = [
     'Development Status :: 4 - Beta',
@@ -63,6 +64,6 @@ setup(name='python-jsend',
       platforms=['any'],
       classifiers=CLASSIFIERS,
       install_requires=[],
-      cmdclass = {'test' : PyTest},
+      # cmdclass = {'test' : PyTest},
 #      test_suite='py.test',
 )
