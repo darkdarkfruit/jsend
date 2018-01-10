@@ -64,9 +64,9 @@
   * 2 functions: make_successful_message, make_failed_message
 
 
-*  Usage: (sample)
+#  Usage: (sample)
 
-  
+
     Python 3.6.2 (default, Aug 10 2017, 10:07:10) 
     Type 'copyright', 'credits' or 'license' for more information
     IPython 6.1.0 -- An enhanced Interactive Python. Type '?' for help.
