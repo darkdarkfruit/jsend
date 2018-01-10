@@ -4,7 +4,7 @@ from .jsend import Message, make_successful_message, make_failed_message, Succes
 
 __author__ = 'darkdarkfruit'
 
-VERSION = (0, 9, 1)
+VERSION = (0, 9, 2)
 
 def get_version():
     version = '%s.%s' % (VERSION[0], VERSION[1])
