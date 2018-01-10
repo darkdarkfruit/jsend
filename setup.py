@@ -1,11 +1,12 @@
 from setuptools import setup, find_packages, Command
 import os
 
+print('Please install pytest(https://docs.pytest.org/en/latest/contents.html) as test suite.')
 DESCRIPTION = "A python module for jsend"
 
 LONG_DESCRIPTION = None
 try:
-    LONG_DESCRIPTION = open('README.rst').read()
+    LONG_DESCRIPTION = open('README.md').read()
 except:
     pass
 
@@ -16,9 +17,9 @@ def get_version(version_tuple):
     return version
 
 init = os.path.join(os.path.dirname(__file__), 'jsend', '__init__.py')
-version_line = filter(lambda l: l.startswith('VERSION'), open(init))[0]
+version_line = list(filter(lambda l: l.startswith('VERSION'), open(init)))[0]
 VERSION = get_version(eval(version_line.split('=')[-1]))
-print VERSION
+print('version: %s' % VERSION)
 
 CLASSIFIERS = [
     'Development Status :: 4 - Beta',
@@ -54,7 +55,7 @@ setup(name='python-jsend',
       version=VERSION,
       packages=find_packages(),
       author='darkdarkfruit',
-      author_email='darkdarkfruit@{nospam}gmail.com',
+      author_email='darkdarkfruit@gmail.com',
       url='https://github.com/darkdarkfruit/jsend',
       license='MIT',
       include_package_data=True,
@@ -63,6 +64,6 @@ setup(name='python-jsend',
       platforms=['any'],
       classifiers=CLASSIFIERS,
       install_requires=[],
-      cmdclass = {'test' : PyTest},
+      # cmdclass = {'test' : PyTest},
 #      test_suite='py.test',
 )
