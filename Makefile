@@ -37,9 +37,9 @@ install : test
 # git push to github
 # do `git remote add origin https://github.com/darkdarkfruit/python-jsend.git` first
 git_push:
-	git push 
+	git push --all
 
 
 # git push with tags
-git_push_tags:
+git_push_tags:git_push
 	git push --tags
